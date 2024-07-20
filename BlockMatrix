@@ -1,0 +1,25 @@
+# scripts/data_analysis.py
+
+import pandas as pd
+
+def analyze_block_data(block_data):
+    """
+    Analyze block data.
+
+    :param block_data: Block data dictionary
+    :return: DataFrame with block data
+    """
+    df = pd.DataFrame([block_data])
+    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+    return df.describe()
+
+def analyze_transaction_data(transaction_data):
+    """
+    Analyze transaction data.
+
+    :param transaction_data: Transaction data dictionary
+    :return: DataFrame with transaction data
+    """
+    df = pd.DataFrame([transaction_data])
+    df['value'] = df['value'].astype(float) / 10**18  # Convert Wei to Ether
+    return df.describe()
